@@ -19,9 +19,11 @@ body{
 
 .task-taps div{
     cursor:pointer;
+    
 }
 .task-taps div{
     padding: 1em;
+    
 }
 
 
@@ -32,11 +34,12 @@ body{
 #under-line{
     height: 4px;
     background-color: pink;
-    width: 100px;
+    width: 87px;
     position: absolute;
     left:0px;
-    top:52px;
+    top:56px;
     padding: 0px;
+    transition: 0.5s;
 }
 
 #user-input{
