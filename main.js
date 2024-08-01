@@ -85,7 +85,7 @@ function render() {
   }
 
   document.getElementById("task-board").innerHTML = resultHTML;
-};
+}
 
 function filter(event) {
   if(event){
