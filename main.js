@@ -1,119 +1,139 @@
-let plusButton = document.getElementById("plus-btn");
-let userInput = document.getElementById("user-input");
-let tabs = document.querySelectorAll(".task-taps div");
-let horizontalMenus= document.querySelectorAll(".task-taps div");
+let inputArea = document.getElementById("task-input");
 
+let taskButton = document.getElementById("add-task");
+let taskTaps = document.querySelectorAll(".task-tap div");
+taskButton.addEventListener("click", addTask);
+taskButton.addEventListener("click", removeTask);
+let horizontalTaps = document.querySelectorAll(".task-tap div");
 
-for (i = 1; i < tabs.length; i++) {
-  tabs[i].addEventListener("click", function (event) {filter(event);
-  });
-}
 let horizontalUnderline=document.getElementById("under-line")
 
-horizontalMenus.forEach(menu=>menu.addEventListener("click",(e)=>horizontalIndicator(e)))
+
+horizontalTaps.forEach(menu=>menu.addEventListener("click",(e)=>horizontalIndicator(e)))
 function horizontalIndicator(e){
     horizontalUnderline.style.left=e.currentTarget.offsetLeft +"px";
     horizontalUnderline.style.width=e.currentTarget.offsetWidth +"px";
     horizontalUnderline.style.top=
         e.currentTarget.offsetTop + e.currentTarget.offsetHeight +"px";
 }
+    
 
-let mode = "all";
+inputArea.addEventListener("keydown", function (event) {
+  if (event.keyCode === 13) {
+    addTask(event);
+  }
+});
+
 let taskList = [];
 let filterList = [];
+let mode = "all";
 
-plusButton.addEventListener("click", addTask);
-userInput.addEventListener("focus", inputReset);
+for (i = 0; i < taskTaps.length; i++) {
+  taskTaps[i].addEventListener("click", function (event) {
+    filter(event);
+  });
+}
 
-function inputReset() {
-  userInput.value = "";
+function removeTask() {
+  inputArea.value = "";
 }
 
 function addTask() {
+  
+  let taskValue = inputArea.value
+  if(taskValue == ""){
+    return alert("할일을 입력하세요")
+    ;
+  }
   let task = {
-    id: randomIDGenerate(),
-    taskContent: userInput.value,
     isComplete: false,
+    taskContent: taskValue,
+    id: randomID(),
   };
-
   taskList.push(task);
+  console.log(taskList);
+
+  inputArea.value = "";
+
   render();
 }
 
 function render() {
-  //내가 선택한 탭에 따라서 리스트를 달리보여준다.
+  let resultHTML = "";
   let list = [];
-  if (mode === "all") {
+
+  if (mode == "all") {
     list = taskList;
-  } else if (mode === "ing" || mode === "done") {
+  } else if (mode == "ing" || mode == "done") {
     list = filterList;
   }
 
-  let resultHtml = "";
   for (let i = 0; i < list.length; i++) {
-    if (list[i].isComplete == true) {
-      resultHtml += `<div class="list">
-    <div class="task-done">${list[i].taskContent}</div>
-    <div>
-      <button onclick="toggleComplete('${list[i].id}')">check</button>
-      <button onclick="deleteTask('${list[i].id}')">delete</button>
-    </div>
-    </div>`;
-    } else {
-      resultHtml += `<div class="list">
-    <div>${list[i].taskContent}</div>
-    <div>
-      <button onclick="toggleComplete('${list[i].id}')">check</button>
-      <button onclick="deleteTask('${list[i].id}')">delete</button>
-    </div>
-    </div>`;
+    if (list[i].isComplete === false) {
+      resultHTML += ` <div id="task-list"><div class="task">${list[i].taskContent}</div>
+    <div class="button-box">
+    <button onclick="checkButton('${list[i].id}')"><i class="fa fa-check"></i></button>
+    <button onclick="deleteButton('${list[i].id}')"><i class="fa fa-trash"></i></button>
+  </div></div>`;
+    } else if (list[i].isComplete === true) {
+      resultHTML += `<div id="task-list"> <div class="task done-line">${list[i].taskContent}</div>
+    <div class="button-box">
+    <button onclick="checkButton('${list[i].id}')"><i class="fa fa-check" style="color: #999999;"></i></button>
+    <button onclick="deleteButton('${list[i].id}')"><i class="fa fa-trash"></i></button>
+  </div></div>`;
     }
   }
-  document.getElementById("task-board").innerHTML = resultHtml;
-}
 
-function deleteTask(id) {
-  for (let i = 0; i < taskList.length; i++) {
-    if (taskList[i].id === id) {
-      taskList.splice(i, 1);
-    }
-  }
-  render();
-}
-
-function toggleComplete(id) {
-  for (let i = 0; i < taskList.length; i++) {
-    if (taskList[i].id == id) {
-      taskList[i].isComplete = !taskList[i].isComplete; //앞에 느낌표 넣으면 현재값의 반대값
-
-      break;
-    }
-  }
-  render();
+  document.getElementById("task-board").innerHTML = resultHTML;
 }
 
 function filter(event) {
-  mode = event.target.id;
+  if(event){
+    mode = event.target.id;
+  }
   filterList = [];
-  if (mode === "all") {
+ 
+
+  if (mode == "all") {
     render();
-  } else if (mode === "ing") {
+  } else if (mode == "ing") {
     for (let i = 0; i < taskList.length; i++) {
       if (taskList[i].isComplete === false) {
         filterList.push(taskList[i]);
+        
       }
-    }
-    render();
-  } else if (mode === "done") {
+    }render();
+  } else if (mode == "done") {
     for (let i = 0; i < taskList.length; i++) {
       if (taskList[i].isComplete === true) {
         filterList.push(taskList[i]);
+        
       }
-    }
-    render();
+    }render();
   }
 }
 
-function randomIDGenerate() {
-  return "id" + Math.random().toString(16).slice(2);
+function checkButton(id) {
+  for (let i = 0; i < taskList.length; i++) {
+    if (taskList[i].id == id) {
+      taskList[i].isComplete = !taskList[i].isComplete;
+      break;
+    }
+  }
+  filter();
 }
+
+function deleteButton(id) {
+  for (let i = 0; i < taskList.length; i++) {
+    if (taskList[i].id == id) {
+      taskList.splice(i, 1);
+      break;
+    }
+  }
+  filter();
+}
+
+function randomID() {
+  return "id" + Math.random().toString(36).substr(2, 9);
+}
+

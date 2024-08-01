@@ -1,69 +1,135 @@
-body{
-    margin: 0;
-    background-image: url(images/background.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
+#container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 50px;
+  font-size: 20px;
 }
 
-.container {
-    background-color: white;
-    min-height: 100vh;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+h1{
+  font-size: 60px;
+  font-weight:900;
+}
+/*
+#under-line {
+  width: 72px;
+  height: 3px; 
+  background-color: red;
+  top: 70px;
+  left: 180px;
+  padding: 0;
+  position: absolute;
+}
+*/
+.input-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  border: 4px solid yellow;
+  background-color: yellow;
 }
 
-.task-taps{
-    display: flex;
-    border-bottom: 1px solid lightgray;
-    position: relative;
+.one {
+  flex-basis: 50%;
+}
+.two {
+  flex-basis: 20%;
+ 
 }
 
-.task-taps div{
-    cursor:pointer;
-    
+#add-task{
+  background-color: yellow;
+  width: 100px;
+  height: 40px;
+  color:#000000;
+  border: 2 solid ;
+  border-radius: 20px; 
+  margin: 3px;
 }
-.task-taps div{
-    padding: 1em;
-    
-}
-
-
-.task-area{
-    border: 1px solid lightgray;
-}
-
-#under-line{
-    height: 4px;
-    background-color: pink;
-    width: 87px;
-    position: absolute;
-    left:0px;
-    top:56px;
-    padding: 0px;
-    transition: 0.5s;
+.task-tap {
+  justify-content: center;
+  display: flex;
+  background-color: #191919;
+  color: #fff;
+  position: relative;
 }
 
-#user-input{
-    font-size: 26px;
-    width: 80%;
-    margin: 0 0 10px;
+.task-tap div {
+  padding: 1em;
+  cursor: pointer;
 }
 
-#plus-btn{
-    width: 19%;
-    background-color: pink;
-    border: none;
+#task-list {
+  display: flex;
+  justify-content: space-between;
+
 }
 
-
-.list{
-    display: flex;
-    justify-content: space-between;
-    padding: 1em;
+#task-area {
+  width: 80%;
+  border: 4px solid #191919;
 }
 
+.done-line {
+  text-decoration: line-through;
 
+  
+}
+#task-input {
+  font-size: 28px;
+  width: 150%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: yellow;
+  border: 0;
+}
 
+.input div {
+  padding: 0px;
+}
+.task{
+  padding: 0;
+}
+.fa-check {
+  color: limegreen;
+}
 
-.task-done{
-    text-decoration: line-through;
+.fa-trash {
+  color: red;
+}
+.fa-undo-alt {
+  color: lightslategray;
+}
+
+.button-box {
+  display: flex;
+}
+
+.button-box button {
+  height: 100%;
+  border: none;
+  width: 5em;
+  margin: 0;
+  padding: 20px;
+
+  background-color: white;
+  transition: 0.5s;
+}
+
+.task{
+  padding: 20px;
+}
+.button-box button :active {
+  position: relative;
+  top: 2px;
+}
+
+.button-box button:first-child:hover {
+  background-color: greenyellow;
+}
+.button-box button:nth-child(2):hover {
+  background-color: rgb(255, 0, 0, 0.3);
 }
