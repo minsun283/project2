@@ -44,7 +44,6 @@ h2{
   flex-basis: 50%;
 }
 .two {
-  flex-basis: 10%;
   padding: 0;
   margin: 0;
   display: flex;
@@ -55,10 +54,10 @@ justify-content: center;
 
 #add-task{
   background-color: yellow;
-  width: 100px;
+  width: 70px;
   height: 40px;
   border: 0 ;
-  margin: 3px;
+  margin: 0;
 }
 .task-tap {
   justify-content: center;
