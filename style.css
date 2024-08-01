@@ -44,12 +44,13 @@ h2{
   flex-basis: 50%;
 }
 .two {
-  flex-basis: 15%;
+  flex-basis: 10%;
   padding: 0;
   margin: 0;
   display: flex;
 align-items: flex-start;
 justify-content: center;
+
 }
 
 #add-task{
@@ -84,7 +85,6 @@ justify-content: center;
 
 .done-line {
   text-decoration: line-through;
-  background-color: yellow;
 
   
 }
