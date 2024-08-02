@@ -8,6 +8,10 @@
   
 }
 
+.task-tap div.active{
+color: yellow;
+font-weight:600;
+}
 h1{
   font-size: 60px;
   font-weight:900;

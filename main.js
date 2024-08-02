@@ -31,7 +31,14 @@ let mode = "all";
 for (i = 0; i < taskTaps.length; i++) {
   taskTaps[i].addEventListener("click", function (event) {
     filter(event);
+
+    for (let j = 0; j< taskTaps.length; j++) {
+      taskTaps[j].classList.remove('active');
+      event.target.classList.add('active');
+    }
+
   });
+
 }
 
 function removeTask() {
@@ -91,6 +98,8 @@ function filter(event) {
   if(event){
     mode = event.target.id;
   }
+
+
   filterList = [];
  
 
@@ -137,3 +146,4 @@ function randomID() {
   return "id" + Math.random().toString(36).substr(2, 9);
 }
 
+alert('할일을 입력하세요.')
